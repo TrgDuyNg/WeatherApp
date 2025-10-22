@@ -77,6 +77,7 @@
         --c-orange-500: hsl(28, 100%, 52%);
         --c--blue-500: hsl(233, 67%, 56%);
         --c--blue-300: hsl(248, 70%, 36%);
+        --c--blue-700: hsl(233, 67%, 46%);
 
         --color-main-bg: var(--c-neutral-900);
         --color-text-light: var(--c-neutral-0);
@@ -147,6 +148,15 @@
         font-family: "Bricolage Grotesque", Arial, Helvetica, sans-serif;
     }
 
+
+    input,
+    button,
+    textarea {
+        font: inherit;
+        width: 100%;
+        border: none;
+    }
+
     .wrapper {
         display: grid;
         grid-template-columns: 1fr calc(100% - 32px) 1fr;
@@ -181,10 +191,107 @@
             padding: 10px;
 
         }
-
-
     }
+
+
 
 }
 
-@layer components {}
+@layer components {
+
+    .header {
+
+        .header_content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-block-start: 16px;
+            padding: calc(16 / 16 * 1rem) 0;
+
+            @media (width >=calc(700 / 16 * 1rem)) {
+                padding: calc(24 / 16 * 1rem) 0;
+            }
+        }
+
+        .header_homelink {}
+
+        .header_logo {
+            width: calc(137 / 16 * 1rem);
+
+            @media (width >=calc(700 / 16 * 1rem)) {
+                width: calc(197 / 16 * 1rem);
+            }
+
+
+        }
+
+        .header_dropdown {
+            width: calc(90 / 16 * 1rem);
+
+            @media (width >=calc(700 / 16 * 1rem)) {
+                width: calc(120 / 16 * 1rem);
+            }
+        }
+
+    }
+
+    .hero {
+        .hero_content {
+            padding-block-start: 48px;
+            display: grid;
+            justify-items: center;
+        }
+
+        .hero_title {
+            font-size: var(--font-size-h1);
+            margin-block-end: 48px;
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.2;
+
+            @media (width >=calc(700 / 16 * 1rem)) {
+                max-width: 15ch;
+            }
+        }
+
+        .hero_search {
+            display: grid;
+            gap: 12px 16px;
+            width: 100%;
+        }
+
+
+        .hero_textbox {
+            background-image: url("/assets/images/icon-search.svg");
+            background-repeat: no-repeat;
+            background-position: 16px center;
+            border: none;
+            background-color: var(--color-panel-bg-dark);
+            font-size: var(--font-size-search);
+            padding: 16px 20px 16px 60px;
+            color: var(--color-text-med-light);
+            border-radius: 12px;
+
+            &:focus {
+                outline: 2px solid var(--color-text-med-light);
+
+            }
+        }
+
+        .hero_button {
+            border-radius: 12px;
+            background-color: var(--c--blue-500);
+            font-size: var(--font-size-search);
+            color: var(--color-text-light);
+            padding-block: 16px;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: var(--c--blue-700);
+                cursor: pointer;
+            }
+        }
+
+
+    }
+}
