@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Weather app</title>
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="visually-hidden skip-link">Skip to main content</a>
+
+
+  <header class="wrapper">
+    <a href="/">
+      <img src="/assets/images/logo.svg" alt="Weather Now Home" width="197" height="40">
+    </a>
+
+    <select name="units" id="units">
+      <option value="" selected>Units</option>
+    </select>
+  </header>
+
+  <main id="main">
+    <section class="hero wrapper">
+      <h1 class="hero_title">How's the sky looking today?</h1>
+
+      <div class="hero_search">
+        <input class="hero_textbox" type="text" name="search" id="search">
+        <button class="hero_button" type="submit">Search</button>
+      </div>
+    </section>
+
+    <section class="current">
+      <h2 class="visually-hidden">Current Location Weather </h2>
+      <div class="current_weather">
+        <div class="current_location">
+          <div class="current_city">Berlin, Germany</div>
+          <div class="current_date">October, 13 , 2025</div>
+        </div>
+        <div class="current_icon">
+          <img src="/assets/images/icon-sunny.webp" alt="" width="320" height="320">
+        </div>
+        <div class="current_conditions">
+          <div class="current_condition">
+            <div class="current_condition-title">Feel Like</div>
+            <div id="feels-like" class="current_condition-value">18°</div>
+          </div>
+          <div class="current_conditions">
+            <div class="current_condition">
+              <div class="current_condition-title">Humidity</div>
+              <div id="humidity" class="current_condition-value">46%</div>
+            </div>
+            <div class="current_condition">
+              <div class="current_condition-title">Wind</div>
+              <div id="wind" class="current_condition-value">14km/h</div>
+            </div>
+            <div class="current_condition">
+              <div class="current_condition-title">Precipitation</div>
+              <div id="precipitation" class="current_condition-value">0 mm</div>
+            </div>
+
+            <div class="current_temp"><span>15°</span></div>
+
+
+          </div>
+    </section>
+
+  </main>
+  <!-- Units
+
+  Switch to Imperial/Metric
+
+  Temperature
+
+  Celsius (°C)
+  Fahrenheit (°F)
+
+  Wind Speed
+
+  km/h
+  mph
+
+  Precipitation
+
+  Millimeters (mm)
+  Inches (in)
+
+  How's the sky looking today?
+
+  Search for a city, e.g., New York
+  Search
+
+  Feels like
+  
+
+  Humidity
+ 
+
+  Wind
+   
+  
+  Precipitation
+ 
+
+  Daily forecast
+ 
+
+  Hourly forecast
+  Insert hourly forecast for the selected day here -->
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+</body>
+
+</html>
