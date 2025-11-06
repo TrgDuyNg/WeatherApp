@@ -10,6 +10,7 @@
 
   <title>Weather app</title>
   <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/scripts.js"></script>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
@@ -34,8 +35,10 @@
         <img class="header_logo" src="/assets/images/logo.svg" alt="Weather Now Home" width="197" height="40">
       </a>
 
-      <select class="header_dropdown" name="units" id="units">
-        <option value="" selected>Units</option>
+      <select class="header_dropdown" name="units" id="ddlUnits">
+        <option value="">Units</option>
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
       </select>
     </div>
   </header>
@@ -61,15 +64,15 @@
 
         <div class="current_weather">
           <div class="current_location">
-            <div class="current_city">Berlin, Germany</div>
-            <div class="current_date">October, 13 , 2025</div>
+            <div id="dvCityCountry" class="current_city">Berlin, Germany</div>
+            <div id="dvCurrDate" class="current_date"> Tuesday, Oct 13, 2025</div>
           </div>
           <div class="current_info">
             <div class="current_icon">
               <img src="/assets/images/icon-sunny.webp" alt="icon representing current weather" width="120"
                 height="120">
             </div>
-            <div class="current_temp"><span>18°C</span></div>
+            <div id="dvCurrTemp" class="current_temp"><span>18°C</span></div>
           </div>
         </div>
 
