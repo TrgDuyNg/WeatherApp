@@ -69,8 +69,8 @@
           </div>
           <div class="current_info">
             <div class="current_icon">
-              <img src="/assets/images/icon-sunny.webp" alt="icon representing current weather" width="120"
-                height="120">
+              <img id="dvCurrWeatherIcon" src="/assets/images/icon-sunny.webp" alt="icon representing current weather"
+                width="120" height="120">
             </div>
             <div id="dvCurrTemp" class="current_temp"><span>18°C</span></div>
           </div>
@@ -79,22 +79,22 @@
         <div class="current_conditions">
           <div class="block current_condition">
             <div class="current_condition-title">Feel Like</div>
-            <div id="feels-like" class="current_condition-value">18°</div>
+            <div id="dvFeelLike" class="current_condition-value">18°</div>
           </div>
 
           <div class="block current_condition">
             <div class="current_condition-title">Humidity</div>
-            <div id="humidity" class="current_condition-value">46%</div>
+            <div id="dvHumidity" class="current_condition-value">46%</div>
           </div>
 
           <div class="block current_condition">
             <div class="current_condition-title">Wind</div>
-            <div id="wind" class="current_condition-value">14km/h</div>
+            <div id="dvWind" class="current_condition-value">14km/h</div>
           </div>
 
           <div class="block current_condition">
             <div class="current_condition-title">Precipitation</div>
-            <div id="precipitation" class="current_condition-value">0 mm</div>
+            <div id="dvPrecipitation" class="current_condition-value">0 mm</div>
           </div>
         </div>
       </section>
@@ -102,7 +102,16 @@
       <section class="daily">
         <h2 class="section_title daily_title">Daily Forecast</h2>
         <div class="daily_forecast">
-          <div class="block daily_day">
+
+          <div id="dvForecast1" class="block daily_day">
+            <p class="daily_day-title">Mon</p>
+            <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
+            <div class="daily_day-temps">
+              <p class="daily_day_high">20°</p>
+              <p class="daily_day_low">14°</p>
+            </div>
+          </div>
+          <div id="dvForecast2" class="block daily_day">
             <p class="daily_day-title">Tue</p>
             <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
             <div class="daily_day-temps">
@@ -111,8 +120,8 @@
             </div>
           </div>
 
-          <div class="block daily_day">
-            <p class="daily_day-title">Tue</p>
+          <div id="dvForecast3" class="block daily_day">
+            <p class="daily_day-title">Wed</p>
             <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
             <div class="daily_day-temps">
               <p class="daily_day_high">20°</p>
@@ -120,8 +129,8 @@
             </div>
           </div>
 
-          <div class="block daily_day">
-            <p class="daily_day-title">Tue</p>
+          <div id="dvForecast4" class="block daily_day">
+            <p class="daily_day-title">Thu</p>
             <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
             <div class="daily_day-temps">
               <p class="daily_day_high">20°</p>
@@ -129,8 +138,8 @@
             </div>
           </div>
 
-          <div class="block daily_day">
-            <p class="daily_day-title">Tue</p>
+          <div id="dvForecast5" class="block daily_day">
+            <p class="daily_day-title">Fri</p>
             <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
             <div class="daily_day-temps">
               <p class="daily_day_high">20°</p>
@@ -138,8 +147,8 @@
             </div>
           </div>
 
-          <div class="block daily_day">
-            <p class="daily_day-title">Tue</p>
+          <div id="dvForecast6" class="block daily_day">
+            <p class="daily_day-title">Sat</p>
             <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
             <div class="daily_day-temps">
               <p class="daily_day_high">20°</p>
@@ -147,8 +156,8 @@
             </div>
           </div>
 
-          <div class="block daily_day">
-            <p class="daily_day-title">Tue</p>
+          <div id="dvForecast7" class="block daily_day">
+            <p class="daily_day-title">Sun</p>
             <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
             <div class="daily_day-temps">
               <p class="daily_day_high">20°</p>
@@ -156,15 +165,8 @@
             </div>
           </div>
 
-          <div class="block daily_day">
-            <p class="daily_day-title">Tue</p>
-            <img class="daily_day-icon" src="/assets/images/icon-rain.webp" alt="" width="320" height="320">
-            <div class="daily_day-temps">
-              <p class="daily_day_high">20°</p>
-              <p class="daily_day_low">14°</p>
-            </div>
-          </div>
-        </div>
+
+
       </section>
 
       <section class="hourly">

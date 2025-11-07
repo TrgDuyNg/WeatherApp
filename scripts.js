@@ -4,6 +4,23 @@ const ddlUnits = document.getElementById("ddlUnits");
 const dvCityCountry = document.getElementById("dvCityCountry");
 const dvCurrDate = document.getElementById("dvCurrDate");
 const dvCurrTemp = document.getElementById("dvCurrTemp");
+const dvCurrWeatherIcon = document.getElementById("dvCurrWeatherIcon");
+const dvFeelLike = document.getElementById("dvFeelLike");
+const dvHumidity = document.getElementById("dvHumidity");
+const dvWind = document.getElementById("dvWind");
+const dvPrecipitation = document.getElementById("dvPrecipitation");
+
+const weatherCodeMap = {
+    sunny: [0],
+    partly_cloudy: [1, 2],
+    overcast: [3],
+    fog: [45, 48],
+    drizzle: [51, 53, 55, 56, 57],
+    rain: [61, 63, 65, 80],
+    snow: [71, 73, 75, 77, 85, 86],
+    storm: [96, 99, 95]
+};
+
 let locationcity, locationcountry;
 
 async function getGeoData(search = "hochiminh") {
@@ -28,10 +45,6 @@ async function getGeoData(search = "hochiminh") {
 
             LoadLocationData(result.features[0].properties);
             getWeatherData(lat, lon);
-
-
-
-
         }
     } catch (error) {
         console.error(error.message);
@@ -62,8 +75,10 @@ async function getWeatherData(lat, lon) {
         }
 
         const result = await response.json();
-        loadTempData(result);
+        loadWeatherData(result.current);
+        loadDailyForecast(result.daily);
         console.log(result);
+
     } catch (error) {
         console.error(error.message);
     }
@@ -85,14 +100,64 @@ function LoadLocationData(locationData) {
 
     dvCityCountry.textContent = `${locationcity}, ${locationcountry}`;
     dvCurrDate.textContent = date;
-    console.log("City: " + locationcity + ", Country: " + locationcountry + ", Date: " + date);
+    // console.log("City: " + locationcity + ", Country: " + locationcountry + ", Date: " + date);
 }
 
 
-function loadTempData(weatherData) {
-    const currTemp = weatherData.current.apparent_temperature;
-    dvCurrTemp.textContent = `${Math.round(currTemp)}°`;
-    console.log("Temperature loaded: " + currTemp);
+function loadWeatherData(weatherData) {
+    dvCurrWeatherIcon.src = `/assets/images/icon-${getWeatherType(weatherData.weather_code)}.webp`;
+    dvCurrTemp.textContent = `${Math.round(weatherData.apparent_temperature)}°`;
+    dvFeelLike.textContent = `${Math.round(weatherData.temperature_2m)}°`;
+    dvHumidity.textContent = `${weatherData.relative_humidity_2m}%`;
+    dvWind.textContent = `${weatherData.wind_speed_10m} km/h`;
+    dvPrecipitation.textContent = `${weatherData.precipitation} mm`;
 }
+
+function loadDailyForecast(dailyData) {
+    const dailyElements = document.querySelectorAll('.daily_day');
+    dailyElements.forEach((element, index) => {
+        if (index < dailyData.time.length) {
+            const date = new Date(dailyData.time[index]);
+            const dayOfWeek = new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(date);
+            // console.log(dayOfWeek);
+            element.querySelector(".daily_day-title").textContent = dayOfWeek;
+
+
+
+            element.querySelector('.daily_day-icon').src = `/assets/images/icon-${getWeatherType(dailyData.weather_code[index])}.webp`;
+
+            element.querySelector('.daily_day_high').textContent =
+                `${Math.round(dailyData.temperature_2m_max[index])}°`;
+            element.querySelector('.daily_day_low').textContent =
+                `${Math.round(dailyData.temperature_2m_min[index])}°`;
+        }
+
+
+    });
+}
+
+
+
+
+function getWeatherType(weatherCode) {
+    for (let [weatherName, codes] of Object.entries(weatherCodeMap)) {
+        if (codes.includes(weatherCode)) {
+            // console.log("Weather type: " + weatherName);
+            return weatherName;
+        }
+    }
+    return "unknown";
+}
+
+
+
+
+
+
+
+
+
+
+
 
 getGeoData();
