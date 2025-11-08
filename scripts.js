@@ -1,5 +1,8 @@
-
-
+let currentUnit = "C";
+let currentLon = null;
+let currentLat = null;
+let hourlyDataGlobal = null;
+let currentTimeGlobal = null;
 const ddlUnits = document.getElementById("ddlUnits");
 const dvCityCountry = document.getElementById("dvCityCountry");
 const dvCurrDate = document.getElementById("dvCurrDate");
@@ -51,11 +54,11 @@ async function getGeoData(search = "hochiminh") {
     }
 }
 
-
-
-
-
 async function getWeatherData(lat, lon) {
+
+    currentLat = lat;
+    currentLon = lon;
+
     let temperature_unit = "celsius";
     let wind_speed_unit = "kmh";
     let precipitation_unit = "mm";
@@ -77,6 +80,7 @@ async function getWeatherData(lat, lon) {
         const result = await response.json();
         loadWeatherData(result.current);
         loadDailyForecast(result.daily);
+        loadHourlyForecast(result.hourly, result.current.time);
         console.log(result);
 
     } catch (error) {
@@ -102,7 +106,6 @@ function LoadLocationData(locationData) {
     dvCurrDate.textContent = date;
     // console.log("City: " + locationcity + ", Country: " + locationcountry + ", Date: " + date);
 }
-
 
 function loadWeatherData(weatherData) {
     dvCurrWeatherIcon.src = `/assets/images/icon-${getWeatherType(weatherData.weather_code)}.webp`;
@@ -136,8 +139,70 @@ function loadDailyForecast(dailyData) {
     });
 }
 
+function loadHourlyForecast(hourlyData, currentDay) {
+    hourlyDataGlobal = hourlyData;
+    currentTimeGlobal = currentDay;
+
+    const sevenDays = [];
+
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(currentDay);
+        date.setDate(date.getDate() + i);
+        sevenDays.push(date.toISOString().split("T")[0]);
+
+    }
+
+    populateDateDropdown(sevenDays);
+    renderHourlyForecastByDate(currentDay);
+
+}
+
+function renderHourlyForecastByDate(targetDate) {
+    const hourlyElements = document.querySelectorAll('.hourly_hour');
+    let currentDate = targetDate.split("T")[0];
+
+    let startIndex = hourlyDataGlobal.time.findIndex(time => time.startsWith(currentDate));
+
+    for (let i = 0; i < hourlyElements.length && i < 24; i++) {
+        const dataIndex = startIndex + i;
+
+        //make sure dataIndex is within bounds
+        if (dataIndex < hourlyDataGlobal.time.length) {
+            const element = hourlyElements[i];
+
+            const time = hourlyDataGlobal.time[dataIndex];
+            const temp = hourlyDataGlobal.temperature_2m[dataIndex];
+            const weatherCode = hourlyDataGlobal.weather_code[dataIndex];
+
+            const hour = new Date(time).getHours(); // get hour from time string
+            const formattedHour = hour.toString().padStart(2, '0') + ":00";
+
+            element.querySelector('.hourly_hour-time').textContent = formattedHour;
+            element.querySelector('.hourly_hour-icon').src = `/assets/images/icon-${getWeatherType(weatherCode)}.webp`;
+            element.querySelector('.hourly_hour-temp').textContent = `${Math.round(temp)}°`;
 
 
+
+        }
+    }
+}
+
+
+function populateDateDropdown(days) {
+    const dropdown = document.getElementById("hourlyDay");
+    dropdown.innerHTML = "";
+
+    days.forEach((day, index) => {
+        const option = document.createElement("option");
+        option.value = day;
+
+        const dateObj = new Date(day);
+        const dayName = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(dateObj);
+
+        option.textContent = dayName;
+        dropdown.appendChild(option);
+    });
+}
 
 function getWeatherType(weatherCode) {
     for (let [weatherName, codes] of Object.entries(weatherCodeMap)) {
@@ -149,10 +214,27 @@ function getWeatherType(weatherCode) {
     return "unknown";
 }
 
+function initializeEventListeners() {
+    document.getElementById('hourlyDay').addEventListener('change', (event) => {
+        const selectedDate = event.target.value;
+        renderHourlyForecastByDate(selectedDate);
+    });
+    ddlUnits.addEventListener('change', handleUnitChange);
+}
 
+function handleUnitChange() {
+    const selectedUnit = ddlUnits.value;
 
+    if (selectedUnit === currentUnit) {
+        return;
+    }
 
+    currentUnit = selectedUnit;
 
+    if (currentLat !== null && currentLon !== null) {
+        getWeatherData(currentLat, currentLon);
+    }
+}
 
 
 
@@ -161,3 +243,5 @@ function getWeatherType(weatherCode) {
 
 
 getGeoData();
+initializeEventListeners();
+

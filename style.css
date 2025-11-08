@@ -254,6 +254,30 @@
 
         .header_dropdown {
             width: calc(90 / 16 * 1rem);
+            background-color: var(--color-panel-bg-dark);
+            color: var(--color-text-light);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--color-panel-border);
+            font-size: var(--font-size-dropdown);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b8bccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 20px;
+            padding-right: 32px;
+
+            &:hover {
+                background-color: var(--color-panel-bg-dark-hover);
+                border-color: var(--color-text-med-light);
+            }
+
+            &:focus {
+                outline: 2px solid var(--color-button);
+                outline-offset: 2px;
+            }
 
             @media (width >=calc(700 / 16 * 1rem)) {
                 width: calc(120 / 16 * 1rem);
@@ -426,6 +450,8 @@
     .daily {
         grid-area: daily;
 
+
+
         .daily_title {
             font-size: var(--font-size-forecast-title);
             margin-block-end: 12px;
@@ -490,6 +516,33 @@
             margin-block-end: 16px;
         }
 
+        #hourlyDay {
+            background-color: var(--color-panel-bg-light);
+            color: var(--color-text-light);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--color-panel-border);
+            font-size: var(--font-size-forecast-dropdown);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b8bccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 18px;
+            padding-right: 32px;
+
+            &:hover {
+                background-color: var(--color-panel-bg-med);
+                border-color: var(--color-text-med-light);
+            }
+
+            &:focus {
+                outline: 2px solid var(--color-button);
+                outline-offset: 2px;
+            }
+        }
+
         .hourly_title {
             font-size: var(--font-size-forecast-title);
             margin-block-end: 16px;
@@ -499,7 +552,32 @@
         .hourly_hours {
             display: grid;
             gap: 16px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 8px;
 
+            /* Firefox scrollbar */
+            scrollbar-color: var(--c-neutral-600) var(--c-neutral-800);
+            scrollbar-width: thin;
+        }
+
+        /* Chrome, Edge, Safari scrollbar */
+        .hourly_hours::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .hourly_hours::-webkit-scrollbar-track {
+            background: var(--c-neutral-800);
+            border-radius: 4px;
+        }
+
+        .hourly_hours::-webkit-scrollbar-thumb {
+            background: var(--c-neutral-600);
+            border-radius: 4px;
+        }
+
+        .hourly_hours::-webkit-scrollbar-thumb:hover {
+            background: var(--c-neutral-500);
         }
 
         .hourly_hour {
