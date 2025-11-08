@@ -110,10 +110,19 @@ function LoadLocationData(locationData) {
 }
 
 function loadWeatherData(weatherData) {
+
     dvCurrWeatherIcon.src = `/assets/images/icon-${getWeatherType(weatherData.weather_code)}.webp`;
     dvCurrTemp.textContent = `${Math.round(weatherData.apparent_temperature)}°`;
     dvFeelLike.textContent = `${Math.round(weatherData.temperature_2m)}°`;
     dvHumidity.textContent = `${weatherData.relative_humidity_2m}%`;
+
+
+    if (currentUnit === "F") {
+        dvWind.textContent = `${weatherData.wind_speed_10m} m/s`;
+        dvPrecipitation.textContent = `${weatherData.precipitation} inch`;
+        return;
+    }
+
     dvWind.textContent = `${weatherData.wind_speed_10m} km/h`;
     dvPrecipitation.textContent = `${weatherData.precipitation} mm`;
 }
