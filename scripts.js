@@ -26,7 +26,9 @@ const weatherCodeMap = {
 
 let locationcity, locationcountry;
 
-async function getGeoData(search = "hochiminh") {
+async function getGeoData(search) {
+    search = search || "hochiminh";
+
     const apiKey = import.meta.env.VITE_GEOAPIFY_API_KEY;
 
     if (!apiKey) {
@@ -219,7 +221,18 @@ function initializeEventListeners() {
         const selectedDate = event.target.value;
         renderHourlyForecastByDate(selectedDate);
     });
+
     ddlUnits.addEventListener('change', handleUnitChange);
+
+    document.querySelector('.hero_button').addEventListener('click', handleSearch);
+
+
+    document.getElementById('search').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
 }
 
 function handleUnitChange() {
@@ -234,6 +247,20 @@ function handleUnitChange() {
     if (currentLat !== null && currentLon !== null) {
         getWeatherData(currentLat, currentLon);
     }
+}
+
+
+function handleSearch() {
+    const searchInput = document.getElementById('search');
+    const searchTerm = searchInput.value.trim();
+
+
+    if (searchTerm === '') {
+        console.warn("Please enter a city name.");
+        return;
+    }
+
+    getGeoData(searchTerm);
 }
 
 
