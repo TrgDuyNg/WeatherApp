@@ -19,7 +19,7 @@ const weatherCodeMap = {
     overcast: [3],
     fog: [45, 48],
     drizzle: [51, 53, 55, 56, 57],
-    rain: [61, 63, 65, 80],
+    rain: [61, 63, 65, 66, 67, 80, 81, 82],
     snow: [71, 73, 75, 77, 85, 86],
     storm: [96, 99, 95]
 };
@@ -268,7 +268,7 @@ function handleSearch() {
         console.warn("Please enter a city name.");
         return;
     }
-
+    // console.log("Searching for: " + searchTerm);
     getGeoData(searchTerm);
 }
 
