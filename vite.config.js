@@ -5,5 +5,9 @@ export default defineConfig({
     port: 5173,
     open: true,
     hmr: true
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets'
   }
 })
